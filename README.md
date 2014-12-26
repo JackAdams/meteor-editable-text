@@ -1,6 +1,9 @@
 Editable Text for Meteor
 ------------------------
 
+Example app: [http://editable-text.meteor.com/](http://editable-text.meteor.com)
+Example app repo: [https://github.com/JackAdams/editable-text-example/](https://github.com/JackAdams/editable-text-example/)
+
 This package provides a widget for rendering the string fields of documents as editable text.
 
 #### Quick Start
@@ -31,7 +34,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `acceptEmpty=true` will accept a value of `''` for the field (by default, the widget won't make an update if an empty input value is entered)
 
-`removeEmpty=true` will remove the whole document from the database if the field value is set to `''`
+`removeEmpty=true` will remove the whole document from the database if the field value is set to `''` (this trumps `acceptEmpty=true`!)
 
 `textarea=true` will make the widget input field a textarea element (by default, it's an `<input type="text" />`)
 
