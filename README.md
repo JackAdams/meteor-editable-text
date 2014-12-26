@@ -57,11 +57,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `inputStyle=dynamicInputStyle` same as above, but for the `input` element when editing text
 
-`substitute=substitute` will let you put something in as a substitute for the editable text if the field value is `''`. e.g.
-	
-	substitute : function() {
-	  return Spacebars.SafeString('<i class="fa fa-pencil"></i>');
-	}
+`substitute='<i class="fa fa-pencil"></i>'` will let you put something in as a substitute for the editable text if the field value is `''`
 
 `title="This is editable text"` changes the title attribute on editable text (default is 'Click to edit')
 
