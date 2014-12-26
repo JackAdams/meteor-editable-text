@@ -69,7 +69,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 (Of course, to make this work, you'll have to save your documents with a `user_id` field that has a value equal to Meteor.userId() of the creator.)
 
-`executeBefore="executeBeforeCallback"`, `executeAfter="executeAfterCallback"` these are the (string) names of functions that are fired just before and just after a database update they receive the widget's data as `this`
+`executeBefore="executeBeforeCallback"`, `executeAfter="executeAfterCallback"` these are the (string) names of functions that are fired just before and just after a database update they receive the widget's data as `this`. These functions have to be in the global scope, although you can do something like `executeBefore="myNamespace.executeBeforeCallback"`, provided `myNamespace` is in the global scope.
 
 `placeholder="New post"` will be the placeholder on `input` or `textarea` elements
 
