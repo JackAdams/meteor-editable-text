@@ -3,10 +3,6 @@ Editable Text for Meteor
 
 This package provides a widget for rendering the string fields of documents as editable text.
 
-An example app is up at [http://meteorpad.com/pad/8Txo3teZsqoSQiXo8/Leaderboard/](http://meteorpad.com/pad/8Txo3teZsqoSQiXo8/Leaderboard/)
-
-The only changes are adding the package `babrahams:editable-text` and changing `{{name}}` in line 35 of `/main.html` to `{{> editableText collection="players" field="name"}}`.
-
 #### Quick Start
 
 	meteor add babrahams:editable-text
