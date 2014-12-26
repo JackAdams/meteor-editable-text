@@ -1,7 +1,8 @@
-.wide-text-edit {
+.wide-text-edit, .text-area-edit {
   margin:0 !important;
-  padding:0 2px !important;
-  border:0 !important;	
+  padding:0 !important;
+  border:0 !important;
+  width:100% !important;	
 }
 
 .wysiwyg {
