@@ -29,13 +29,13 @@ where `singlePostDocument` can be a single post document already set in the curr
 
 There are a number of parameters you can pass to the widget that affect its behaviour:
 
-`removeEmpty=true` will remove the whole document from the database if the field is set to `''`
-
 `acceptEmpty=true` will accept a value of `''` for the field (by default, the widget won't make an update if an empty input value is entered)
+
+`removeEmpty=true` will remove the whole document from the database if the field value is set to `''`
 
 `textarea=true` will make the widget input field a textarea element (by default, it's an `<input type="text" />`)
 
-`wysiwyg=true` will make the widget a wysiwyg editor -- completely uncustomizable - what you see is what you get! :-)
+`wysiwyg=true` will make the widget a wysiwyg editor (which is completely _un_customizable -- what you see is what you get! :-))
 
 `autoInsert=true` will let you supply a data context without an `_id` field and the widget will create a document using all the fields of the data context
 
@@ -50,6 +50,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 `inputClass="input-class"` will change the class attribute of the `input` element once the text is being edited
 
 `style=dynamicStyle` can be used if you need to have more dynamic control over the style of the editable text (use a template helper to give the `dynamicStyle`) e.g.
+	
 	dynamicStyle : function() {
 	  return 'color:' + Session.get('currentColor') + ';';
 	} 
@@ -57,6 +58,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 `inputStyle=dynamicInputStyle` same as above, but for the `input` element when editing text
 
 `substitute=substitute` will let you put something in as a substitute for the editable text if the field value is `''`. e.g.
+	
 	substitute : function() {
 	  return Spacebars.SafeString('<i class="fa fa-pencil"></i>');
 	}
@@ -64,6 +66,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 `title="This is editable text"` changes the title attribute on editable text (default is 'Click to edit')
 
 `userCanEdit=userCanEdit` is a way to tell the widget whether the current user can edit the text or only view it (using a template helper) e.g.
+	
 	userCanEdit : function() {
 	  return this.user_id === Meteor.userId();
 	}
@@ -92,7 +95,7 @@ All changes to documents are made on the client, so they are subject to the allo
 	  return this.context.user_id === Meteor.userId();
 	}
 
-It is a good idea to make the `EditableText.userCanEdit` function and the logic for your allow and deny functions to share the same codebase to the greatest degress possible.
+It is a good idea to make the `EditableText.userCanEdit` function and your allow and deny functions share the same logic to the greatest degress possible.
 
 #### Roadmap
 
