@@ -19,12 +19,12 @@
   {{else}}
     {{#if canEditText}}
       {{#if substitute}}
-        <span title="{{title}}" class="editable-text {{class}} et_{{context._id}}">{{substitute}}</span>
+        <span title="{{title}}" class="editable-text {{class}} et-{{context._id}}">{{substitute}}</span>
       {{else}}
         {{#if isWysiwyg}}
-          <div class="wysiwyg-content"><div class="editable-text {{class}} et_{{context._id}}" title="{{title}}" style="{{style}}">{{wysiwygContent}}</div></div>
+          <div class="wysiwyg-content"><div class="editable-text {{class}} et-{{context._id}}" title="{{title}}" style="{{style}}">{{wysiwygContent}}</div></div>
         {{else}}
-          <span class="editable-text {{class}} et_{{context._id}}" title="{{title}}">{{content}}</span>
+          <span class="editable-text {{class}} et-{{context._id}}" title="{{title}}">{{content}}</span>
         {{/if}}
       {{/if}}
     {{else}}

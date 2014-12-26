@@ -76,7 +76,9 @@ There are a number of parameters you can pass to the widget that affect its beha
 `executeBefore="executeBeforeCallback"`, `executeAfter="executeAfterCallback"` these are the (string) names of functions that are fired just before and just after a database update they receive the widget's data as `this`
 
 `placeholder="New post"` will be the placeholder on `input` or `textarea` elements
-  
+
+#### Transactions
+
 There is built-in support for the `babrahams:transactions` package, if you want everything to be undo/redo-able. To enable this:
 
 	meteor add babrahams:transactions

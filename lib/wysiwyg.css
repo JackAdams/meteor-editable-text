@@ -5,6 +5,7 @@
 }
 
 .wysiwyg {
+  min-height: 20px;
   max-height: 250px;
   background-color: white;
   border-collapse: separate;
