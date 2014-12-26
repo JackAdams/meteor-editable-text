@@ -15,9 +15,9 @@ Package.on_use(function (api, where) {
   api.use('templating', 'client');
   api.use('blaze', 'client');
   api.use('spacebars', 'client');
-  api.use('bootstrap', 'client');
+  api.use('bootstrap@1.0.1', 'client');
   api.use('natestrauser:font-awesome@4.2.0');
-  api.use('dburles:mongo-collection-instances', 'client');
+  api.use('dburles:mongo-collection-instances@0.2.5', 'client');
   api.use('underscore', ['client', 'server']);
   api.use('mongo', ['client', 'server']);
   api.use('reactive-var', 'client');
