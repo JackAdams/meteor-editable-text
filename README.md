@@ -1,11 +1,11 @@
 Editable Text for Meteor
 ------------------------
 
-This package provides a widget for rendering the string fields of documents as editable text.
+This package provides a widget for rendering the fields of documents as editable text.
 
-Example app: [http://editable-text.meteor.com/](http://editable-text.meteor.com)
+Example app: [http://editable-text.meteor.com](http://editable-text.meteor.com)
 
-Example app repo: [https://github.com/JackAdams/editable-text-example/](https://github.com/JackAdams/editable-text-example/)
+Example app repo: [https://github.com/JackAdams/editable-text-example](https://github.com/JackAdams/editable-text-example)
 
 #### Quick Start
 
@@ -15,9 +15,9 @@ You can then drop an editable text widget into any Blaze template as follows:
 
 	{{> editableText collection="posts" field="author"}}
 	
-where "posts" is the name of the mongo collection and "author" is a the name of a document field for the "posts" collection.
+where "posts" is the name of the mongo collection and "author" is the name of a document field for the "posts" collection.
 
-`collection` and `field` are the only compulsory fields.
+`collection` and `field` are the only mandatory fields.
 
 Note: The widget assumes that the data context is that of a single document from the "posts" collection (with _id value included).
 
@@ -29,6 +29,15 @@ where `singlePostDocument` can be a single post document already set in the curr
 
 (You can use `document`, `doc`, `object`, `obj`, `data` or `dataContext` instead of `context` - go with whichever you prefer.)
 
+#### Configuration
+
+You can change the global behaviour of the widget by setting certain properties of `EditableText`, which is the only variable that this package exposes.
+
+`EditableText.saveOnFocusout=false` will mean that the `focusout` event will not save text that is being edited (default is `EditableText.saveOnFocusout=true`)
+
+`EditableText.trustHTML=true` will mean that HTML entered in `input` and `textarea` fields is rendered as HTML (default is `EditableText.trustHTML=false`)
+
+
 #### Options
 
 There are a number of parameters you can pass to the widget that affect its behaviour:
@@ -39,7 +48,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `textarea=true` will make the widget input field a textarea element (by default, it's an `<input type="text" />`)
 
-`wysiwyg=true` will make the widget a wysiwyg editor (which is completely _un_customizable -- what you see is what you get! :-))
+`wysiwyg=true` will make the widget a wysiwyg editor (which is, at present, completely uncustomizable -- what you see is what you get! :-)). You'll need to `meteor add babrahams:editable-text-wysiwyg` or this `wysiwyg=true` will have no apparent effect and the editing widget will fall back to a textarea (with the difference that HTML strings will be displayed as actual HTML not as a string showing the markup, so be careful with this).
 
 `autoInsert=true` will let you supply a data context without an `_id` field and the widget will create a document using all the fields of the data context
 
@@ -77,6 +86,10 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `placeholder="New post"` will be the placeholder on `input` or `textarea` elements
 
+`saveOnFocusout=false` will prevent a particular widget instance from saving the text being edited on a `focusout` event (the default is to save the text, which can be changed via `EditableText.saveOnFocusout`)
+
+`trustHTML=true` will make a particular widget instance rendered its text as HTML (default is `false`, which can be changed via `EditableText.trustHTML`)
+
 #### Transactions
 
 There is built-in support for the `babrahams:transactions` package, if you want everything to be undo/redo-able. To enable this:
@@ -89,7 +102,7 @@ and in your app (in some config file on the client), add:
 
 Or if you only want transactions on particular instances of the widget, pass `useTransaction=true` or `useTransaction=false` to override the default that was set using `EditableText.useTransactions`.
 
-#### Notes
+#### Security
 
 All changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections. To control whether certain users can edit text on the client, you can overwrite the function `EditableText.userCanEdit` (which has `this` containing all the data given to the widget, including `context` which is the document itself).  e.g. (to only allow users to edit their own documents):
 
@@ -97,11 +110,11 @@ All changes to documents are made on the client, so they are subject to the allo
 	  return this.context.user_id === Meteor.userId();
 	}
 
-It is a good idea to make the `EditableText.userCanEdit` function and your allow and deny functions share the same logic to the greatest degress possible.
+It is a good idea to make the `EditableText.userCanEdit` function and your allow and deny functions share the same logic to the greatest degree possible.
 
 #### Roadmap
 
-- Factor out the wysiwyg editor and let it be added optionally via another package
+~~- Factor out the wysiwyg editor and let it be added optionally via another package~~
 
 - Clean up code base and make it more readable
 
