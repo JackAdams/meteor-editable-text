@@ -19,7 +19,7 @@ Package.on_use(function (api, where) {
   api.use('underscore', ['client','server']);
   api.use('mongo', ['client','server']);
   api.use('reactive-var', 'client');
-  api.use('djedi:sanitize-html', 'server');
+  api.use('djedi:sanitize-html@1.3.0', 'server');
 
   api.add_files('lib/editable_text.css', 'client');
   api.add_files('lib/editable_text.html', 'client');
