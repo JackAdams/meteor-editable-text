@@ -1,7 +1,7 @@
 Package.describe({
   name: "babrahams:editable-text",
   summary: "Editable text drop-in template helper",
-  version: "0.3.1",
+  version: "0.4.0",
   git: "https://github.com/jackadams/meteor-editable-text.git"
 });
 
@@ -19,6 +19,7 @@ Package.on_use(function (api, where) {
   api.use('underscore', ['client','server']);
   api.use('mongo', ['client','server']);
   api.use('reactive-var', 'client');
+  api.use('djedi:sanitize-html', 'server');
 
   api.add_files('lib/editable_text.css', 'client');
   api.add_files('lib/editable_text.html', 'client');
