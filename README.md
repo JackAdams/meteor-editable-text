@@ -37,22 +37,25 @@ You can change the global behaviour of the widget by setting certain properties 
 
 `EditableText.trustHTML=true` will mean that HTML entered in `input` and `textarea` fields is rendered as HTML (default is `EditableText.trustHTML=false`)
 
+Set several at once using `EditableText.config({saveOnFocusout:false,trustHTML:true});`. Config can only be changed on the client.
 
 #### Options
 
 There are a number of parameters you can pass to the widget that affect its behaviour:
 
-`acceptEmpty=true` will accept a value of `''` for the field (by default, the widget won't make an update if an empty input value is entered)
+`acceptEmpty=true` will accept a value of `""` for the field (by default, the widget won't make an update if an empty input value is entered)
 
-`removeEmpty=true` will remove the whole document from the database if the field value is set to `''` (this trumps `acceptEmpty=true`!)
+`removeEmpty=true` will remove the whole document from the database if the field value is set to `""` (this trumps `acceptEmpty=true`!!)
 
 `textarea=true` will make the widget input field a textarea element (by default, it's an `<input type="text" />`)
 
-`wysiwyg=true` will make the widget a wysiwyg editor (which is, at present, completely uncustomizable -- what you see is what you get! :-)). You'll need to `meteor add babrahams:editable-text-wysiwyg` or this `wysiwyg=true` will have no apparent effect and the editing widget will fall back to a textarea (with the difference that HTML strings will be displayed as actual HTML not as a string showing the markup, so be careful with this).
+`wysiwyg=true` will make the widget a wysiwyg editor (which is, at present, completely uncustomizable -- what you see is what you get! :-)). You'll need to `meteor add babrahams:editable-text-wysiwyg` or this `wysiwyg=true` will have no apparent effect and the editing widget will fall back to a textarea (with the difference being that HTML strings will be displayed as actual HTML not as a string showing the markup, so be careful with this).
 
 `autoInsert=true` will let you supply a data context without an `_id` field and the widget will create a document using all the fields of the data context
 
-`onAutoInsert="callbackFunction"` will call `callbackFunction(newDocument)` with `this` as the data context of the `editableText` widget 
+`onAutoInsert="callbackFunction"` will call `callbackFunction(newDocument,Collection)` with `this` as the data (including `context`) that the `editableText` widget was initialized with
+
+(other client side callback functions are `beforeUpdate`,`afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the Collection as the only parameter and have the widget data as `this`)
 
 `eventType="mousein"` will make the text to become editable when the cursor goes over the editable text (other events can be used too) -- the default is `"click"`
 
@@ -104,19 +107,29 @@ Or if you only want transactions on particular instances of the widget, pass `us
 
 #### Security
 
-All changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections. To control whether certain users can edit text on the client, you can overwrite the function `EditableText.userCanEdit` (which has `this` containing all the data given to the widget, including `context` which is the document itself).  e.g. (to only allow users to edit their own documents):
+`EditableText.useMethods=false` will mean that all changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections. To control whether certain users can edit text on the client, you can overwrite the function `EditableText.userCanEdit` (which has `this` containing all the data given to the widget, including `context` which is the document itself).  e.g. (to only allow users to edit their own documents):
 
 	EditableText.userCanEdit = function() {
 	  return this.context.user_id === Meteor.userId();
 	}
 
-It is a good idea to make the `EditableText.userCanEdit` function and your allow and deny functions share the same logic to the greatest degree possible.
+In this case, it is a good idea to make the `EditableText.userCanEdit` function and your allow and deny functions share the same logic to the greatest degree possible.
+
+Note: the default setting is `EditableText.useMethods=true`, meaning updates are processed server side and bypass your allow and deny rules. If you're happy with this (and you should be), then all you need to do for consistency between client and server permission checks is overwrite the `EditableText.userCanEdit` function in a file that is shared by both client and server.  Note that this function receives the widget data context as `this` and the collection object as the only parameter.
+
+    // e.g. If `type` is the editable field, but you want to limit the number of objects in the collection with any given value of `type` to 10
+    EditableText.userCanEdit = function(Collection) {
+	  var count = Collection.find({type:this.context.type}).count(); // `this.context` is a document from `Collection`
+	  return count < 10;
+	}
 
 #### Roadmap
 
-~~- Factor out the wysiwyg editor and let it be added optionally via another package~~
+~~Factor out the wysiwyg editor and let it be added optionally via another package~~
 
-- Clean up code base and make it more readable
+~~Make updates via methods rather than on the client using allow/deny rules~~
+
+- Clean up and document code base
 
 - Put in error messages to help developers use the widget successfully
 

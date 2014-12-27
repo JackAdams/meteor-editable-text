@@ -4,3 +4,7 @@
   border:0 !important;
   width:100% !important;	
 }
+
+.editable-text {
+  cursor:context-menu;	
+}
