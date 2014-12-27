@@ -15,11 +15,11 @@ You can then drop an editable text widget into any Blaze template as follows:
 
 	{{> editableText collection="posts" field="author"}}
 	
-where "posts" is the name of the mongo collection and "author" is the name of a document field for the "posts" collection.
+where "posts" is the name of the mongo collection and "author" is the name of a document field for the `posts` collection.
 
 `collection` and `field` are the only mandatory fields.
 
-Note: The widget assumes that the data context is that of a single document from the "posts" collection (with _id value included).
+Note: The widget assumes that the data context is that of a single document from the `posts` collection (with _id value included).
 
 You can also set the data context explicitly as follows:
 
