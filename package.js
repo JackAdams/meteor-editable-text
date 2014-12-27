@@ -1,8 +1,8 @@
 Package.describe({
+  name: "babrahams:editable-text",
   summary: "Editable text drop-in template helper",
-  version: "0.2.0",
-  git: "https://github.com/jackadams/meteor-editable-text.git",
-  name: "babrahams:editable-text"
+  version: "0.2.1",
+  git: "https://github.com/jackadams/meteor-editable-text.git"
 });
 
 Package.on_use(function (api, where) {
