@@ -35,7 +35,7 @@ You can change the global behaviour of the widget by setting certain properties 
 
 `EditableText.saveOnFocusout=false` will mean that the `focusout` event will not save text that is being edited (default is `EditableText.saveOnFocusout=true`)
 
-`EditableText.trustHTML=true` will mean that HTML entered in `input` and `textarea` fields is rendered as HTML (default is `EditableText.trustHTML=false`)
+`EditableText.trustHTML=true` will mean that HTML entered in `input` and `textarea` fields is rendered as HTML (default is `EditableText.trustHTML=false`) - useful if you want newlines from textareas automatically represented as <br /> tags
 
 Set several at once using `EditableText.config({saveOnFocusout:false,trustHTML:true});`. Config can only be changed on the client.
 

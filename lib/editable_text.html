@@ -5,7 +5,7 @@
 <template name="editable_text_widget"> 
   {{#if editing}}
     {{#if textarea}}
-      <textarea class="text-area-edit {{inputClass}}" placeholder="{{placeholder}}" title="Hold SHIFT and press ENTER for a new line" style="{{inputStyle}}">{{value}}</textarea>
+      <textarea class="text-area-edit {{inputClass}}" placeholder="{{placeholder}}" title="{{#if trustHTML}}Hold SHIFT and press ENTER for a new line{{/if}}" style="{{inputStyle}}">{{value}}</textarea>
     {{else}}
       {{#if isWysiwyg}}
         <div class="wysiwyg-container">
