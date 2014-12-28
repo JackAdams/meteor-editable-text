@@ -99,11 +99,11 @@ There is built-in support for the `babrahams:transactions` package, if you want 
 
 	meteor add babrahams:transactions
 
-and in your app (in some config file on the client), add:
+and in your app (in some config file on both client and server), add:
 
 	EditableText.useTransactions = true;
 
-Or if you only want transactions on particular instances of the widget, pass `useTransaction=true` or `useTransaction=false` to override the default that was set using `EditableText.useTransactions`.
+Or if you only want transactions on particular instances of the widget, pass `useTransaction=true` or `useTransaction=false` to override the default that was set via `EditableText.useTransactions` on the client (and don't set a value on the server). If you set the `EditableText.useTransactions` value on the server, it doesn't matter what you set on the client (or pass from the client), you will always get the behaviour as set by the server.
 
 #### Security
 
