@@ -1,7 +1,7 @@
 Package.describe({
   name: "babrahams:editable-text",
   summary: "Editable text drop-in template helper",
-  version: "0.4.4",
+  version: "0.5.0",
   git: "https://github.com/jackadams/meteor-editable-text.git"
 });
 
@@ -24,7 +24,8 @@ Package.on_use(function (api, where) {
   api.add_files('lib/editable_text.css', 'client');
   api.add_files('lib/editable_text.html', 'client');
   api.add_files('lib/editable_text.js','client');
-  api.add_files('lib/editable_text_methods.js',['client','server']);
+  api.add_files('lib/editable_text_common.js',['client','server']);
+  api.add_files('lib/editable_text_server.js','server');
   
   if (api.export) {
     api.export('EditableText','client');

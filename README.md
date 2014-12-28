@@ -15,7 +15,7 @@ You can then drop an editable text widget into any Blaze template as follows:
 
 	{{> editableText collection="posts" field="author"}}
 	
-where "posts" is the name of the mongo collection and "author" is the name of a document field for the `posts` collection.
+where "posts" is the name of the mongo collection and "author" is the name of a document field for the `posts` collection (`author.firstName` would also work as the field name).
 
 `collection` and `field` are the only mandatory fields.
 
