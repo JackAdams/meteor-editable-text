@@ -135,7 +135,7 @@ Bigger warning: it doesn't really matter what you set `EditableText.useMethods` 
 
 ~~Sanitize all html that comes through method calls (assume every string field is html)~~
 
-- Add support for fields like `author.firstName`
+~~ Add support for fields like `author.firstName`~~
 
 - Clean up and document code base
 
