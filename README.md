@@ -107,7 +107,7 @@ Or if you only want transactions on particular instances of the widget, pass `us
 
 #### Security
 
-`EditableText.useMethods=false` will mean that all changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections. To control whether certain users can edit text on the client, you can overwrite the function `EditableText.userCanEdit` (which has `this` containing all the data given to the widget, including `context` which is the document itself).  e.g. (to only allow users to edit their own documents):
+`EditableText.useMethods=false` will mean that all changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections. To control whether certain users can edit text on certain documents/fields, you can overwrite the function `EditableText.userCanEdit` (which has `this` containing all the data given to the widget, including `context` which is the document itself).  e.g. (to only allow users to edit their own documents):
 
 	EditableText.userCanEdit = function() {
 	  return this.context.user_id === Meteor.userId();
@@ -123,11 +123,19 @@ Note: the default setting is `EditableText.useMethods=true`, meaning updates are
 	  return count < 10;
 	}
 
+Warning: if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. By default (i.e. when `EditableText.useMethods=true`) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
+
+Bigger warning: it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes whose persistence are entirely subject to your `allow` and `deny` rules.
+
 #### Roadmap
 
 ~~Factor out the wysiwyg editor and let it be added optionally via another package~~
 
 ~~Make updates via methods rather than on the client using allow/deny rules~~
+
+~~Sanitize all html that comes through method calls (assume every string field is html)~~
+
+- Add support for fields like `author.firstName`
 
 - Clean up and document code base
 
