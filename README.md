@@ -105,7 +105,7 @@ and in your app (in some config file on both client and server), add:
 
 	EditableText.useTransactions = true;
 
-Or if you only want transactions on particular instances of the widget, pass `useTransaction=true` or `useTransaction=false` to override the default that was set via `EditableText.useTransactions` on the client (and don't set a value on the server). If you set the `EditableText.useTransactions` value on the server, it doesn't matter what you set on the client (or pass from the client), you will always get the behaviour as set by the server.
+Or if you only want transactions on particular instances of the widget, pass `useTransaction=true` or `useTransaction=false` to override the default that was set via `EditableText.useTransactions`, but this will only work if you also set `EditableText.clientControlsTransactions=true` (by default it is `false`). If you set the `EditableText.useTransactions` value on the server, without changing `EditableText.clientControlsTransactions`, it doesn't matter what you set on the client (or pass from the client), you will always get the behaviour as set on the server.
 
 #### Security
 
