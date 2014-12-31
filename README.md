@@ -3,9 +3,9 @@ Editable Text for Meteor
 
 This package provides a widget for rendering the fields of documents as editable text.
 
-Example app: [http://editable-text.meteor.com](http://editable-text.meteor.com)
+Example apps: [http://editable-text.meteor.com](http://editable-text.meteor.com) and [http://editable-text-demo.meteor.com](http://editable-text-demo.meteor.com) (using collection2, accounts and transactions)
 
-Example app repo: [https://github.com/JackAdams/editable-text-example](https://github.com/JackAdams/editable-text-example)
+Example app repo: [https://github.com/JackAdams/editable-text-example](https://github.com/JackAdams/editable-text-example) and [https://github.com/JackAdams/editable-text-demo](https://github.com/JackAdams/editable-text-demo)
 
 #### Quick Start
 
@@ -53,9 +53,11 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `autoInsert=true` will let you supply a data context without an `_id` field and the widget will create a document using all the fields of the data context
 
-`onAutoInsert="callbackFunction"` will call `callbackFunction(newDocument,Collection)` with `this` as the data (including `context`) that the `editableText` widget was initialized with
+`beforeInsert="callbackFunction"` will call `callbackFunction(documentToBeInserted,Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately before an auto insert
 
-(other client side callback functions are `beforeUpdate`,`afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the Collection as the only parameter and have the widget data as `this`)
+`afterInsert="callbackFunction"` will call `callbackFunction(newlyInsertedDocument,Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately after an auto insert
+
+(other client side callback functions are `beforeUpdate`,`afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`)
 
 `eventType="mousein"` will make the text to become editable when the cursor goes over the editable text (other events can be used too) -- the default is `"click"`
 
