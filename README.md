@@ -59,6 +59,8 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 (other client side callback functions are `beforeUpdate`,`afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`)
 
+For all callbacks, the values of the parameters must be the (string) names of functions, not the functions themselves. These functions have to be in the global scope, although you can do something like `executeBefore="myNamespace.executeBeforeCallback"`, provided `myNamespace` is in the global scope. They receive the widget's data as `this`.
+
 `eventType="mousein"` will make the text to become editable when the cursor goes over the editable text (other events can be used too) -- the default is `"click"`
 
 `type="number"` will mean the value entered is stored as a `NumberInt` value in mongo (the default is `type="string"`)
@@ -86,8 +88,6 @@ There are a number of parameters you can pass to the widget that affect its beha
 	}
 
 (Of course, to make this work, you'll have to save your documents with a `user_id` field that has a value equal to Meteor.userId() of the creator.)
-
-`executeBefore="executeBeforeCallback"`, `executeAfter="executeAfterCallback"` these are the (string) names of functions that are fired just before and just after a database update they receive the widget's data as `this`. These functions have to be in the global scope, although you can do something like `executeBefore="myNamespace.executeBeforeCallback"`, provided `myNamespace` is in the global scope.
 
 `placeholder="New post"` will be the placeholder on `input` or `textarea` elements
 
