@@ -57,9 +57,19 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `afterInsert="callbackFunction"` will call `callbackFunction(newlyInsertedDocument,Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately after an auto insert
 
-(other client side callback functions are `beforeUpdate`,`afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`)
+(other available callback functions hooks are `beforeUpdate`,`afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`)
 
-For all callbacks, the values of the parameters must be the (string) names of functions, not the functions themselves. These functions have to be in the global scope, although you can do something like `executeBefore="myNamespace.executeBeforeCallback"`, provided `myNamespace` is in the global scope. They receive the widget's data as `this`.
+For all callbacks, the values of the parameters must be the (string) names of functions, not the functions themselves. These functions have to be registered as follows, using `EditableText.registerCallbacks`:
+
+	EditableText.registerCallbacks({
+	  addTimestampToDoc : function(doc) {
+		return _.extend(doc,{timestamp:Date.now()});
+	  }
+	});
+	
+This would then be applied by passing the parameter `beforeInsert='addTimestampToDoc'` when initializing a widget that has also been passed `autoInsert=true`.
+
+Notice that returning a modified document in a `beforeInsert` function will mean that this is the version of the document that will be inserted into the db. 
 
 `eventType="mousein"` will make the text to become editable when the cursor goes over the editable text (other events can be used too) -- the default is `"click"`
 
