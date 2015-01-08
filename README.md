@@ -97,7 +97,9 @@ Notice that returning a modified document in a `beforeInsert` function will mean
 	  return this.user_id === Meteor.userId();
 	}
 
-(Of course, to make this work, you'll have to save your documents with a `user_id` field that has a value equal to Meteor.userId() of the creator.)
+(Of course, to make the above work, you would have to save your documents with a `user_id` field that has a value equal to Meteor.userId() of the creator.)
+
+`userCanEdit` is really only useful for preventing text from being editable on the client in certain circumstances (by setting it to `false`). In the end, the only logic that matters is that of the `EditableText.userCanEdit` function (see the 'Security' section below).
 
 `placeholder="New post"` will be the placeholder on `input` or `textarea` elements
 
@@ -119,11 +121,19 @@ Or if you only want transactions on particular instances of the widget, pass `us
 
 #### Security
 
-`EditableText.useMethods=false` will mean that all changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections. To control whether certain users can edit text on certain documents/fields, you can overwrite the function `EditableText.userCanEdit` (which has `this` containing all the data given to the widget, including `context` which is the document itself).  e.g. (to only allow users to edit their own documents):
+To control whether certain users can edit text on certain documents/fields, you can overwrite the function `EditableText.userCanEdit` (which gets the data and config passed to the widget as `this` and parameters which are the document and collection).  e.g. (to only allow users to edit their own documents):
 
-	EditableText.userCanEdit = function() {
-	  return this.context.user_id === Meteor.userId();
+	EditableText.userCanEdit = function(doc,Collection) {
+	  return this.context.user_id === Meteor.userId(); // same as: doc.user_id === Meteor.userId();
 	}
+
+**It is important that you overwrite this function in a production app** as the default is:
+
+    EditableText.userCanEdit = function(doc,Collection) {
+	  return true;
+	}
+
+... which means anyone can edit any field in any document.
 
 In this case, it is a good idea to make the `EditableText.userCanEdit` function and your allow and deny functions share the same logic to the greatest degree possible.
 
@@ -137,7 +147,7 @@ Note: the default setting is `EditableText.useMethods=true`, meaning updates are
 
 Warning: if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. By default (i.e. when `EditableText.useMethods=true`) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
 
-Bigger warning: it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes whose persistence are entirely subject to your `allow` and `deny` rules.
+Bigger warning: it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes whose persistence to the database are subject only to your `allow` and `deny` rules.
 
 #### Roadmap
 
