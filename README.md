@@ -140,7 +140,7 @@ In this case, it is a good idea to make the `EditableText.userCanEdit` function 
 Note: the default setting is `EditableText.useMethods=true`, meaning updates are processed server side and bypass your allow and deny rules. If you're happy with this (and you should be), then all you need to do for consistency between client and server permission checks is overwrite the `EditableText.userCanEdit` function in a file that is shared by both client and server.  Note that this function receives the widget data context as `this` and the collection object as the only parameter.
 
     // e.g. If `type` is the editable field, but you want to limit the number of objects in the collection with any given value of `type` to 10
-    EditableText.userCanEdit = function(Collection) {
+    EditableText.userCanEdit = function(doc,Collection) {
 	  var count = Collection.find({type:this.context.type}).count(); // `this.context` is a document from `Collection`
 	  return count < 10;
 	}
