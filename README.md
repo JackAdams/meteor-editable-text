@@ -35,9 +35,9 @@ You can change the global behaviour of the widget by setting certain properties 
 
 `EditableText.saveOnFocusout=false` will mean that the `focusout` event will not save text that is being edited (default is `EditableText.saveOnFocusout=true`)
 
-`EditableText.trustHTML=true` will mean that HTML entered in `input` and `textarea` fields is rendered as HTML (default is `EditableText.trustHTML=false`) - useful if you want newlines from textareas automatically represented as `<br />` tags
+`EditableText.trustHtml=true` will mean that HTML entered in `input` and `textarea` fields is rendered as HTML (default is `EditableText.trustHTML=false`) - useful if you want newlines from textareas automatically represented as `<br />` tags
 
-Set several at once using `EditableText.config({saveOnFocusout:false,trustHTML:true});`. Config can only be changed on the client.
+Set several config properties at once using `EditableText.config({saveOnFocusout:false,trustHtml:true});`. Config properties that only have an effect on the client are: `saveOnFocusout`, `trustHtml`, and `useMethods`. Config properties that need to be set on both client and server are: `userCanEdit`, `useTransactions`, `maximumImageSize`, `allowedHtml`.  Server only: `clientControlsTransactions`.
 
 #### Options
 
@@ -57,7 +57,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `afterInsert="callbackFunction"` will call `callbackFunction(newlyInsertedDocument,Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately after an auto insert
 
-(other available callback functions hooks are `beforeUpdate`,`afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`)
+(other available callback function hooks are `beforeUpdate`,`afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`)
 
 For all callbacks, the values of the parameters must be the (string) names of functions, not the functions themselves. These functions have to be registered as follows, using `EditableText.registerCallbacks`:
 
@@ -105,7 +105,7 @@ Notice that returning a modified document in a `beforeInsert` function will mean
 
 `saveOnFocusout=false` will prevent a particular widget instance from saving the text being edited on a `focusout` event (the default is to save the text, which can be changed via `EditableText.saveOnFocusout`)
 
-`trustHTML=true` will make a particular widget instance rendered its text as HTML (default is `false`, which can be changed via `EditableText.trustHTML`)
+`trustHtml=true` will make a particular widget instance rendered its text as HTML (default is `false`, which can be changed via `EditableText.trustHTML`)
 
 #### Transactions
 
@@ -145,9 +145,9 @@ Note: the default setting is `EditableText.useMethods=true`, meaning updates are
 	  return count < 10;
 	}
 
-Warning: if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. By default (i.e. when `EditableText.useMethods=true`) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
+**Warning:** if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. By default (i.e. when `EditableText.useMethods=true`) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
 
-Bigger warning: it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes whose persistence to the database are subject only to your `allow` and `deny` rules.
+**Bigger warning:** it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes whose persistence to the database are subject only to your `allow` and `deny` rules.
 
 #### Roadmap
 

@@ -1,11 +1,11 @@
 <template name="editableText">
-  {{> editable_text_widget context=context collection=collection field=field value=value textarea=textarea wysiwyg=wysiwyg acceptEmpty=acceptEmpty removeEmpty=removeEmpty eventType=eventType type=type objectTypeText=objectTypeText class=class inputClass=inputClass autoInsert=autoInsert beforeInsert=beforeInsert afterInsert=afterInsert wysiwygStyle=wysiwygStyle style=style inputStyle=inputStyle substitute=substitute title=title userCanEdit=userCanEdit useTransaction=useTransaction beforeUpdate=beforeUpdate afterUpdate=afterUpdate beforeRemove=beforeRemove afterRemove=afterRemove beforeRemove=beforeRemove afterRemove=afterRemove placeholder=placeholder saveOnFocusout=saveOnFocusout trustHTML=trustHTML useMethod=useMethod toolbarPosition=toolbarPosition}}
+  {{> editable_text_widget context=context collection=collection field=field value=value textarea=textarea wysiwyg=wysiwyg acceptEmpty=acceptEmpty removeEmpty=removeEmpty eventType=eventType type=type objectTypeText=objectTypeText class=class inputClass=inputClass autoInsert=autoInsert beforeInsert=beforeInsert afterInsert=afterInsert wysiwygStyle=wysiwygStyle style=style inputStyle=inputStyle substitute=substitute title=title userCanEdit=userCanEdit useTransaction=useTransaction beforeUpdate=beforeUpdate afterUpdate=afterUpdate beforeRemove=beforeRemove afterRemove=afterRemove beforeRemove=beforeRemove afterRemove=afterRemove placeholder=placeholder saveOnFocusout=saveOnFocusout trustHtml=trustHtml useMethod=useMethod toolbarPosition=toolbarPosition}}
 </template>
 
 <template name="editable_text_widget"> 
   {{#if editing}}
     {{#if textarea}}
-      <textarea class="text-area-edit {{inputClass}}" placeholder="{{placeholder}}" title="{{#if trustHTML}}Hold SHIFT and press ENTER for a new line{{/if}}" style="{{inputStyle}}">{{value}}</textarea>
+      <textarea class="text-area-edit {{inputClass}}" placeholder="{{placeholder}}" title="{{#if trustHtml}}Hold SHIFT and press ENTER for a new line{{/if}}" style="{{inputStyle}}">{{value}}</textarea>
     {{else}}
       {{#if isWysiwyg}}
         <div class="wysiwyg-container">
