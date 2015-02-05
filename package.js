@@ -21,7 +21,7 @@ Package.onUse(function (api, where) {
   api.use('reactive-var', 'client');
   api.use('djedi:sanitize-html@1.3.0', 'server');
   api.imply('djedi:sanitize-html');
-  api.use('gwendall:body-events', 'client');
+  api.use('gwendall:body-events@0.1.4', 'client');
 
   api.add_files('lib/editable_text.css', 'client');
   api.add_files('lib/editable_text.html', 'client');
