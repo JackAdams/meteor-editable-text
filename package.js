@@ -1,7 +1,7 @@
 Package.describe({
   name: "babrahams:editable-text",
   summary: "Editable text drop-in template helper",
-  version: "0.7.21",
+  version: "0.7.22",
   git: "https://github.com/jackadams/meteor-editable-text.git"
 });
 
@@ -31,6 +31,7 @@ Package.onUse(function (api, where) {
   
   if (api.export) {
     api.export('EditableText');
+	api.export('sanitizeHtml');
   }
   
 });
