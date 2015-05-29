@@ -9,12 +9,12 @@ Example app repo: [https://github.com/JackAdams/editable-text-example](https://g
 
 #### Quick Start
 
-	meteor add babrahams:editable-text
+    meteor add babrahams:editable-text
 
 You can then drop an editable text widget into any Blaze template as follows:
 
-	{{> editableText collection="posts" field="author"}}
-	
+    {{> editableText collection="posts" field="author"}}
+    
 where "posts" is the name of the mongo collection and "author" is the name of a document field for the `posts` collection (`author.firstName` would also work as the field name).
 
 `collection` and `field` are the only mandatory parameters.
@@ -61,12 +61,12 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 For all callbacks, the values of the parameters must be the (string) names of functions, not the functions themselves. These functions have to be registered as follows, using `EditableText.registerCallbacks`:
 
-	EditableText.registerCallbacks({
-	  addTimestampToDoc : function(doc) {
-		return _.extend(doc,{timestamp:Date.now()});
-	  }
-	});
-	
+    EditableText.registerCallbacks({
+      addTimestampToDoc : function(doc) {
+        return _.extend(doc,{timestamp:Date.now()});
+      }
+    });
+    
 This would then be applied by passing the parameter `beforeInsert='addTimestampToDoc'` when initializing a widget that has also been passed `autoInsert=true`.
 
 Notice that returning a modified document in a `beforeInsert` function will mean that this is the version of the document that will be inserted into the db. 
@@ -80,10 +80,10 @@ Notice that returning a modified document in a `beforeInsert` function will mean
 `inputClass="input-class"` will change the class attribute of the `input` element once the text is being edited
 
 `style=dynamicStyle` can be used if you need to have more dynamic control over the style of the editable text (use a template helper to give the `dynamicStyle`) e.g.
-	
-	dynamicStyle : function() {
-	  return 'color:' + Session.get('currentColor') + ';';
-	} 
+    
+    dynamicStyle : function() {
+      return 'color:' + Session.get('currentColor') + ';';
+    } 
 
 `inputStyle=dynamicInputStyle` same as above, but for the `input` element when editing text
 
@@ -92,10 +92,10 @@ Notice that returning a modified document in a `beforeInsert` function will mean
 `title="This is editable text"` changes the title attribute on editable text (default is 'Click to edit')
 
 `userCanEdit=userCanEdit` is a way to tell the widget whether the current user can edit the text or only view it (using a template helper) e.g.
-	
-	userCanEdit : function() {
-	  return this.user_id === Meteor.userId();
-	}
+    
+    userCanEdit : function() {
+      return this.user_id === Meteor.userId();
+    }
 
 (Of course, to make the above work, you would have to save your documents with a `user_id` field that has a value equal to Meteor.userId() of the creator.)
 
@@ -107,15 +107,36 @@ Notice that returning a modified document in a `beforeInsert` function will mean
 
 `trustHtml=true` will make a particular widget instance rendered its text as HTML (default is `false`, which can be changed via `EditableText.trustHTML`)
 
+All of these options can be set by using the `options=optionsHelper` parameter, where `optionsHelper` is a template helper that returns an object such as this:
+
+```
+Template.myTemplate.helpers({
+  optionsHelper : function() {
+    return {
+      collection: "posts",
+      field: "title",
+      removeEmpty: true,
+      acceptEmpty: true,
+      placeholder: "Post title",
+      substitute: '<i class="fa fa-pencil"></i>'
+    }
+  }
+});
+```
+
+#### Triggering widget
+
+If you wrap the `{{> editableText ... }}` widget in an element which has `class="editable-text-trigger"`, a click on that element will trigger the edititing.
+
 #### Transactions
 
 There is built-in support for the `babrahams:transactions` package, if you want everything to be undo/redo-able. To enable this:
 
-	meteor add babrahams:transactions
+    meteor add babrahams:transactions
 
 and in your app (in some config file on both client and server), add:
 
-	EditableText.useTransactions = true;
+    EditableText.useTransactions = true;
 
 Or if you only want transactions on particular instances of the widget, pass `useTransaction=true` or `useTransaction=false` to override the default that was set via `EditableText.useTransactions`, but this will only work if you also set `EditableText.clientControlsTransactions=true` (by default it is `false`). If you set the `EditableText.useTransactions` value on the server, without changing `EditableText.clientControlsTransactions`, it doesn't matter what you set on the client (or pass from the client), you will always get the behaviour as set on the server.
 
@@ -123,15 +144,15 @@ Or if you only want transactions on particular instances of the widget, pass `us
 
 To control whether certain users can edit text on certain documents/fields, you can overwrite the function `EditableText.userCanEdit` (which gets the data and config passed to the widget as `this` and parameters which are the document and collection).  e.g. (to only allow users to edit their own documents):
 
-	EditableText.userCanEdit = function(doc,Collection) {
-	  return this.context.user_id === Meteor.userId(); // same as: doc.user_id === Meteor.userId();
-	}
+    EditableText.userCanEdit = function(doc,Collection) {
+      return this.context.user_id === Meteor.userId(); // same as: doc.user_id === Meteor.userId();
+    }
 
 **It is important that you overwrite this function in a production app** as the default is:
 
     EditableText.userCanEdit = function(doc,Collection) {
-	  return true;
-	}
+      return true;
+    }
 
 ... which means anyone can edit any field in any document.
 
@@ -141,9 +162,9 @@ Note: the default setting is `EditableText.useMethods=true`, meaning updates are
 
     // e.g. If `type` is the editable field, but you want to limit the number of objects in the collection with any given value of `type` to 10
     EditableText.userCanEdit = function(doc,Collection) {
-	  var count = Collection.find({type:this.context.type}).count(); // `this.context` is a document from `Collection`
-	  return count < 10;
-	}
+      var count = Collection.find({type:this.context.type}).count(); // `this.context` is a document from `Collection`
+      return count < 10;
+    }
 
 **Warning:** if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. By default (i.e. when `EditableText.useMethods=true`) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
 
