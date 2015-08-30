@@ -3,9 +3,9 @@ Editable Text for Meteor
 
 This package provides a widget for rendering the fields of documents as editable text.
 
-Example apps: [http://editable-text.meteor.com](http://editable-text.meteor.com) and [http://editable-text-demo.meteor.com](http://editable-text-demo.meteor.com) (using collection2, accounts and transactions)
+Example app: [http://editable-text-demo.meteor.com](http://editable-text-demo.meteor.com) (also using collection2, accounts and transactions)
 
-Example app repo: [https://github.com/JackAdams/editable-text-example](https://github.com/JackAdams/editable-text-example) and [https://github.com/JackAdams/editable-text-demo](https://github.com/JackAdams/editable-text-demo)
+Example app repo: [https://github.com/JackAdams/editable-text-demo](https://github.com/JackAdams/editable-text-demo)
 
 #### Quick Start
 
@@ -15,11 +15,11 @@ You can then drop an editable text widget into any Blaze template as follows:
 
     {{> editableText collection="posts" field="author"}}
     
-where "posts" is the name of the mongo collection and "author" is the name of a document field for the `posts` collection (`author.firstName` would also work as the field name).
+where "posts" is the name of the actual mongo collection (not the name of a Meteor `Mongo.Collection` instance) and "author" is the name of a document field for the `posts` collection (`author.firstName` would also work as the field name).
 
 `collection` and `field` are the only mandatory parameters.
 
-Note: The widget assumes that the data context is that of a single document from the `posts` collection (with _id value included).
+Note: The widget assumes that the data context is that of a single document from the `posts` collection (with the _id value included).
 
 You can also set the data context explicitly as follows:
 
@@ -49,7 +49,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `textarea=true` will make the widget input field a textarea element (by default, it's an `<input type="text" />`)
 
-`wysiwyg=true` will make the widget a wysiwyg editor (which is, at present, completely uncustomizable -- what you see is what you get! :-)). You'll need to `meteor add babrahams:editable-text-wysiwyg` or this `wysiwyg=true` will have no apparent effect and the editing widget will fall back to a textarea (with the difference being that HTML strings will be displayed as actual HTML not as a string showing the markup, so be careful with this). **Note:** When using content created using the wysiwyg editor in non-editable fields and other templates you will need to use triple curly braces like `{{{body}}}`.
+`wysiwyg=true` will make the widget a wysiwyg editor (which is, at present, completely uncustomizable -- what you see is what you get! :-)). You'll need to `meteor add babrahams:editable-text-wysiwyg-bootstrap-3` or this `wysiwyg=true` will have no apparent effect and the editing widget will fall back to a textarea (with the difference being that HTML strings will be displayed as actual HTML not as a string showing the markup, so be careful with this). **Note:** When using content created using the wysiwyg editor in non-editable fields and other templates you will need to use triple curly braces like `{{{body}}}`.
 
 `autoInsert=true` will let you supply a data context without an `_id` field and the widget will create a document using all the fields of the data context
 
