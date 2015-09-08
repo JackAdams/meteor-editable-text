@@ -107,6 +107,8 @@ Notice that returning a modified document in a `beforeInsert` function will mean
 
 `trustHtml=true` will make a particular widget instance rendered its text as HTML (default is `false`, which can be changed via `EditableText.trustHTML`)
 
+`stopPropagation=true` will stop the event that triggers the widget from propagating up the the elements ancestors on the DOM (default is `stopPropagation=false`, so the event will propagate)
+
 All of these options can be set by using the `options=optionsHelper` parameter, where `optionsHelper` is a template helper that returns an object such as this:
 
 ```
