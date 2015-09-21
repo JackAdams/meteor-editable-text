@@ -1,4 +1,4 @@
-babrahams:editable-text@0.8.2
+babrahams:editable-text@0.8.4
 base64@1.0.3
 binary-heap@1.0.3
 blaze@2.1.2
@@ -8,7 +8,7 @@ check@1.0.5
 dburles:mongo-collection-instances@0.3.4
 ddp@1.1.0
 deps@1.0.7
-djedi:sanitize-html@1.9.0
+djedi:sanitize-html@1.10.0
 ejson@1.0.6
 geojson-utils@1.0.3
 gwendall:body-events@0.1.6
