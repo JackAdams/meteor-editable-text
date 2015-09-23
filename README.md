@@ -71,7 +71,7 @@ This would then be applied by passing the parameter `beforeInsert='addTimestampT
 
 Notice that returning a modified document in a `beforeInsert` function will mean that this is the version of the document that will be inserted into the db. 
 
-`eventType="mousein"` will make the text to become editable when the cursor goes over the editable text (other events can be used too) -- the default is `"click"`
+`eventType="dblclick"` will make the text become editable only when double clicked (only event types supported are `"click"`, `"dblclick"`, `"mousedown"`) -- the default is `"click"`
 
 `type="number"` will mean the value entered is stored as a `NumberInt` value in mongo (the default is `type="string"`)
 
