@@ -84,7 +84,7 @@ For all callbacks, the values of the parameters must be the (string) names of fu
 	  }
     });
     
-This would then be applied by passing the parameter `beforeInsert='addTimestampToDoc'` when initializing a widget that has also been passed `autoInsert=true`.
+These would then be applied by passing the parameter `beforeInsert='addTimestampToDocBeforeInsert'` (when initializing a widget that has also been passed `autoInsert=true`), `beforeUpdate='coerceTypeToDateBeforeUpdate'`, etc.
 
 Notice that returning a modified _document_ in a `beforeInsert` function will mean that this is the version of the document that will be inserted into the db, while returning a modified _value_ (usually a string) from a `beforeUpdate` function will mean that the modified value is used for the db update (good for custom validations).
 
