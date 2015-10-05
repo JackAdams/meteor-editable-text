@@ -53,23 +53,38 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `autoInsert=true` will let you supply a data context without an `_id` field and the widget will create a document using all the fields of the data context
 
-`beforeInsert="callbackFunction"` will call `callbackFunction(documentToBeInserted,Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately before an auto insert
+`beforeInsert="addTimestampToDocBeforeInsert"` will call `addTimestampToDocBeforeInsert(documentToBeInserted, Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately before an auto insert
 
-`afterInsert="callbackFunction"` will call `callbackFunction(newlyInsertedDocument,Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately after an auto insert
+`afterInsert="callbackFunction"` will call `callbackFunction(newlyInsertedDocument, Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately after an auto insert
 
-(other available callback function hooks are `beforeUpdate`,`afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`)
+`beforeUpdate="coerceTypeToDateBeforeUpdate"`, will call `coerceTypeToDateBeforeUpdate(doc, Collection, newValue, modifier)`, with `this` as the data that the `editableText` widget was initialized with. `beforeUpdate` callbacks are special cased to be called with the `newValue` and `modifier` arguments. Also, for `beforeUpdate` callbacks only, if the callback function returns a value, that will replace the `newValue` that the user entered, **unless** the callback returns an object with `$set`, `$addToSet` or `$push` as one of its keys -- in this case, it will be assumed that it is overwriting the whole modifier, not just the `newValue`. See the examples below.
+
+(other available callback function hooks are `afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`)
 
 For all callbacks, the values of the parameters must be the (string) names of functions, not the functions themselves. These functions have to be registered as follows, using `EditableText.registerCallbacks`:
 
     EditableText.registerCallbacks({
-      addTimestampToDoc : function(doc) {
-        return _.extend(doc,{timestamp:Date.now()});
-      }
+      addTimestampToDocBeforeInsert : function (doc) {
+        return _.extend(doc, {timestamp: Date.now()});
+      },
+	  coerceTypeToDateBeforeUpdate : function (doc, Collection, newValue, modifier) {
+	    return new Date(newValue);
+	  },
+	  checkForExpletivesBeforeUpdate : function (doc, Collection, newValue, modifier) {
+	    var expletives = ['assorted', 'bad', 'words'];
+		var containsExpletives = !!_.find(expletives, function (expletive) {
+		  return newValue.indexOf(expletive) > -1;
+		});
+		// modifier is already of the form { $set: {text: newValue}}
+		modifier["$set"].containsExpletives = containsExpletives;
+		}
+		return modifier;
+	  }
     });
     
 This would then be applied by passing the parameter `beforeInsert='addTimestampToDoc'` when initializing a widget that has also been passed `autoInsert=true`.
 
-Notice that returning a modified document in a `beforeInsert` function will mean that this is the version of the document that will be inserted into the db. 
+Notice that returning a modified _document_ in a `beforeInsert` function will mean that this is the version of the document that will be inserted into the db, while returning a modified _value_ (usually a string) from a `beforeUpdate` function will mean that the modified value is used for the db update (good for custom validations).
 
 `eventType="dblclick"` will make the text become editable only when double clicked (only event types supported are `"click"`, `"dblclick"`, `"mousedown"`) -- the default is `"click"`
 
@@ -174,13 +189,13 @@ Note: the default setting is `EditableText.useMethods=true`, meaning updates are
 
 #### Roadmap
 
-~~Factor out the wysiwyg editor and let it be added optionally via another package~~
+- ~~Factor out the wysiwyg editor and let it be added optionally via another package~~
 
-~~Make updates via methods rather than on the client using allow/deny rules~~
+- ~~Make updates via methods rather than on the client using allow/deny rules~~
 
-~~Sanitize all html that comes through method calls (assume every string field is html)~~
+- ~~Sanitize all html that comes through method calls (assume every string field is html)~~
 
-~~Add support for fields like `author.firstName`~~
+- ~~Add support for fields like `author.firstName`~~
 
 - Clean up and document code base
 
