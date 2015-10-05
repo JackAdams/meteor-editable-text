@@ -59,7 +59,9 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `beforeUpdate="coerceTypeToDateBeforeUpdate"`, will call `coerceTypeToDateBeforeUpdate(doc, Collection, newValue, modifier)`, with `this` as the data that the `editableText` widget was initialized with. `beforeUpdate` callbacks are special cased to be called with the `newValue` and `modifier` arguments. Also, for `beforeUpdate` callbacks only, if the callback function returns a value, that will replace the `newValue` that the user entered, **unless** the callback returns an object with `$set`, `$addToSet` or `$push` as one of its keys -- in this case, it will be assumed that it is overwriting the whole modifier, not just the `newValue`. See the examples below.
 
-(other available callback function hooks are `afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`)
+Other available callback function hooks are `afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`.
+
+`onStartEditing` and `onStopEditing` callbacks are called with `this` as the data that the `editableText` widget was initialized with and the document being edited as the only parameter. (The same is true of `onShowToolbar` and `onHideToolbar` if the `babrahams:editable-text-wysiwyg-bootstrap-3` package is added.)
 
 For all callbacks, the values of the parameters must be the (string) names of functions, not the functions themselves. These functions have to be registered as follows, using `EditableText.registerCallbacks`:
 
@@ -144,6 +146,8 @@ Template.myTemplate.helpers({
 #### Triggering widget
 
 If you wrap the `{{> editableText ... }}` widget in an element which has `class="editable-text-trigger"`, a click on that element will trigger the edititing.
+
+**Note:** Only use `class="editable-text-trigger"` to trigger the widget with `eventType` values that are `click` (default), `dblclick` or `mousedown`. If you use other `eventType` values, you will run into problems with recursion.
 
 #### Transactions
 
