@@ -15,6 +15,7 @@ Package.onUse(function (api, where) {
   api.use('templating', 'client');
   api.use('blaze', 'client');
   api.use('spacebars', 'client');
+  api.use('random', 'client');
   api.use('dburles:mongo-collection-instances@0.3.4');
   api.use(['underscore', 'check'], ['client','server']);
   api.use('mongo', ['client','server']);
