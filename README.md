@@ -3,7 +3,7 @@ Editable Text for Meteor
 
 This package provides a widget for rendering the fields of documents as editable text.
 
-Example app: [http://editable-text-demo.meteor.com](http://editable-text-demo.meteor.com) (also using collection2, accounts and transactions)
+Example app: [http://editable-text-demo.taonova.com](http://editable-text-demo.taonova.com) (also using collection2, accounts and transactions)
 
 Example app repo: [https://github.com/JackAdams/editable-text-demo](https://github.com/JackAdams/editable-text-demo)
 
