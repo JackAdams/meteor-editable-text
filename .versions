@@ -1,7 +1,7 @@
 allow-deny@1.0.4
 babel-compiler@6.6.4
 babel-runtime@0.1.8
-babrahams:editable-text@0.8.14
+babrahams:editable-text@0.8.15
 base64@1.0.8
 binary-heap@1.0.8
 blaze@2.1.7
