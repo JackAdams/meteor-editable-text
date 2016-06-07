@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.8.17
+
+- Added some undocumented API calls
+
 ### v0.8.12
 
 - Added support for external editors (babrahams:editable-text-froala)

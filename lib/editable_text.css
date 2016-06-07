@@ -1,10 +1,24 @@
 .wide-text-edit, .text-area-edit {
-  margin:0;
-  padding:0;
-  border:0;
-  width:100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
 }
 
 .editable-text {
-  cursor:default;    
+  cursor: default;    
+}
+
+.editable-text-save-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.editable-text-save-button:hover {
+  background: #eee;	
 }
