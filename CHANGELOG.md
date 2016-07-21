@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.8.19
+
+- Fixed a bug in which an error was thrown on the client when deleting all text
+
 ### v0.8.17
 
 - Added some undocumented API calls
