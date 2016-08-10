@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.8.21
+
+- POSSIBLE BREAKING CHANGE: Changed default behaviour for `removeEmpty`, where it didn't remove documents if a field was empty during a focusout event; now they are removed (to retain the previous default behaviour, you need to set `removeOnFocusout=false` -- a falsy value won't do, it must === false)
+
 ### v0.8.20
 
 - Added a `data` param so arbitrary data can be sent to the server (e.g. for use in callback functions)
