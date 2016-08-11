@@ -5,6 +5,11 @@ Meteor Editable Text
 
 - Tests
 
+### v0.8.22
+
+- Allowed `color` attribute for `font` elements to support color picker for wysiwyg editors
+- Added support for `transactionUpdateText`, `transactionInsertText` and `transactionRemoveText` to allow transactions to incorporate callback actions
+
 ### v0.8.21
 
 - POSSIBLE BREAKING CHANGE: Changed default behaviour for `removeEmpty`, where it didn't remove documents if a field was empty during a focusout event; now they are removed (to retain the previous default behaviour, you need to set `removeOnFocusout=false` -- a falsy value won't do, it must === false)
