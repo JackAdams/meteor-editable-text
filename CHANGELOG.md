@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v.0.8.23
+
+- Added an `unsetEmpty` option
+
 ### v0.8.22
 
 - Allowed `color` attribute for `font` elements to support color picker for wysiwyg editors
