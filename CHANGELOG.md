@@ -5,7 +5,11 @@ Meteor Editable Text
 
 - Tests
 
-### v.0.8.23
+### v0.8.24
+
+- Fix for bug introduced in 0.8.23
+
+### v0.8.23
 
 - Added an `unsetEmpty` option
 
