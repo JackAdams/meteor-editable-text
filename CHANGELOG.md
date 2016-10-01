@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.8.25
+
+- Added a `useExistingTransaction` option (for babrahams:transactions package integration), allowing writes made by the babrahams:editable-text package to be part of a larger transaction (if one is already started; otherwise it will just start a new one, as usual). This can replace the `useTransaction` option.
+
 ### v0.8.24
 
 - Fix for bug introduced in 0.8.23
