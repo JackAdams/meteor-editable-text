@@ -29,15 +29,19 @@ where `singlePostDocument` can be a single post document already set in the curr
 
 (You can use `document`, `doc`, `object`, `obj`, `data` or `dataContext` instead of `context` - go with whichever you prefer.)
 
+#### API
+
+This package exposes the symbols `EditableText` and `sanitizeHtml`. `sanitizeHtml` would only be used if you have very specific requirements when using a wysiwyg package and can be ignored for most apps. `EditableText` is used for setting app-wide config for the `{{> editableText ...}}` widget as shown below.  
+
 #### Configuration
 
-You can change the global behaviour of the widget by setting certain properties of `EditableText`, which is the only variable that this package exposes.
+You can change the global behaviour of the widget by setting certain properties of `EditableText`.
 
 `EditableText.saveOnFocusout=false` will mean that the `focusout` event will not save text that is being edited (default is `EditableText.saveOnFocusout=true`)
 
 `EditableText.trustHtml=true` will mean that HTML entered in `input` and `textarea` fields is rendered as HTML (default is `EditableText.trustHTML=false`) - useful if you want newlines from textareas automatically represented as `<br />` tags
 
-Set several config properties at once using `EditableText.config({saveOnFocusout:false,trustHtml:true});`. Config properties that only have an effect on the client are: `saveOnFocusout`, `trustHtml`, and `useMethods`. Config properties that need to be set on both client and server are: `userCanEdit`, `useTransactions`, `maximumImageSize`, `allowedHtml`.  Server only: `clientControlsTransactions`.
+Set several config properties at once using `EditableText.config({saveOnFocusout: false, trustHtml: true});`. Config properties that only have an effect on the client are: `saveOnFocusout`, `trustHtml`, and `useMethods`. Config properties that need to be set on both client and server are: `userCanEdit`, `useTransactions`, `maximumImageSize`, `allowedHtml`.  Server only: `clientControlsTransactions`.
 
 #### Options
 
@@ -45,11 +49,13 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `acceptEmpty=true` will accept a value of `""` for the field (by default, the widget won't make an update if an empty input value is entered)
 
+`unsetEmpty=true` will accept a value of `""` and `$unset` the field (this overrides `acceptEmpty`)
+
 `removeEmpty=true` will remove the whole document from the database if the field value is set to `""` (this trumps `acceptEmpty=true`!!)
 
 `textarea=true` will make the widget input field a textarea element (by default, it's an `<input type="text" />`)
 
-`wysiwyg=true` will make the widget a wysiwyg editor (which is, at present, completely uncustomizable -- what you see is what you get! :-)). You'll need to `meteor add babrahams:editable-text-wysiwyg-bootstrap-3` or this `wysiwyg=true` will have no apparent effect and the editing widget will fall back to a textarea (with the difference being that HTML strings will be displayed as actual HTML not as a string showing the markup, so be careful with this). **Note:** When using content created using the wysiwyg editor in non-editable fields and other templates you will need to use triple curly braces like `{{{body}}}`.
+`wysiwyg=true` will make the widget a wysiwyg editor (which is, at present, completely uncustomizable -- what you see is what you get! :-)). You'll need to `meteor add babrahams:editable-text-wysiwyg-bootstrap-3` or this `wysiwyg=true` will have no apparent effect and the editing widget will fall back to a textarea (with the difference being that HTML strings will be displayed as actual HTML not as a string showing the markup, so be careful with this). **Note:** When using content created using the wysiwyg editor in non-editable fields and other templates you will need to use triple curly braces like `{{{postText}}}`.
 
 `autoInsert=true` will let you supply a data context without an `_id` field and the widget will create a document using all the fields of the data context
 
@@ -59,7 +65,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `beforeUpdate="coerceTypeToDateBeforeUpdate"`, will call `coerceTypeToDateBeforeUpdate(doc, Collection, newValue, modifier)`, with `this` as the data that the `editableText` widget was initialized with. `beforeUpdate` callbacks are special cased to be called with the `newValue` and `modifier` arguments. Also, for `beforeUpdate` callbacks only, if the callback function returns a value, that will replace the `newValue` that the user entered, **unless** the callback returns an object with `$set`, `$addToSet` or `$push` as one of its keys -- in this case, it will be assumed that it is overwriting the whole modifier, not just the `newValue`. See the examples below.
 
-Other available callback function hooks are `afterUpdate`,`beforeRemove`,`afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`.
+Other available callback function hooks are `afterUpdate`, `beforeRemove`, `afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`.
 
 `onStartEditing` and `onStopEditing` callbacks are called with `this` as the data that the `editableText` widget was initialized with and the document being edited as the only parameter. (The same is true of `onShowToolbar` and `onHideToolbar` if the `babrahams:editable-text-wysiwyg-bootstrap-3` package is added.)
 
@@ -165,13 +171,13 @@ Or if you only want transactions on particular instances of the widget, pass `us
 
 To control whether certain users can edit text on certain documents/fields, you can overwrite the function `EditableText.userCanEdit` (which gets the data and config passed to the widget as `this` and parameters which are the document and collection).  e.g. (to only allow users to edit their own documents):
 
-    EditableText.userCanEdit = function(doc,Collection) {
+    EditableText.userCanEdit = function(doc, Collection) {
       return this.context.user_id === Meteor.userId(); // same as: doc.user_id === Meteor.userId();
     }
 
 **It is important that you overwrite this function in a production app** as the default is:
 
-    EditableText.userCanEdit = function(doc,Collection) {
+    EditableText.userCanEdit = function(doc, Collection) {
       return true;
     }
 
@@ -182,8 +188,8 @@ In this case, it is a good idea to make the `EditableText.userCanEdit` function 
 Note: the default setting is `EditableText.useMethods=true`, meaning updates are processed server side and bypass your allow and deny rules. If you're happy with this (and you should be), then all you need to do for consistency between client and server permission checks is overwrite the `EditableText.userCanEdit` function in a file that is shared by both client and server.  Note that this function receives the widget data context as `this` and the collection object as the only parameter.
 
     // e.g. If `type` is the editable field, but you want to limit the number of objects in the collection with any given value of `type` to 10
-    EditableText.userCanEdit = function(doc,Collection) {
-      var count = Collection.find({type:this.context.type}).count(); // `this.context` is a document from `Collection`
+    EditableText.userCanEdit = function(doc, Collection) {
+      var count = Collection.find({type: this.context.type}).count(); // `this.context` is a document from `Collection`
       return count < 10;
     }
 

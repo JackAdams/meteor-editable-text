@@ -5,6 +5,13 @@ Meteor Editable Text
 
 - Tests
 
+### v0.8.31
+
+- Fixed a bug where substitute html would display instead of zeros for `type="number"`
+- Removed dependency on `djedi:sanitize-html` and rolled the NPM dependency on `sanitize-html` into the `babrahams:editable-text` package
+- Fixed a bug where `unsetEmpty` wouldn't unset the field on the server
+- Added support for editing HTML with wysiwyg editors 
+
 ### v0.8.25
 
 - Added a `useExistingTransaction` option (for babrahams:transactions package integration), allowing writes made by the babrahams:editable-text package to be part of a larger transaction (if one is already started; otherwise it will just start a new one, as usual). This can replace the `useTransaction` option.
