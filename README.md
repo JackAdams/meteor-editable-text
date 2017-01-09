@@ -59,13 +59,13 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `autoInsert=true` will let you supply a data context without an `_id` field and the widget will create a document using all the fields of the data context
 
-`beforeInsert="addTimestampToDocBeforeInsert"` will call `addTimestampToDocBeforeInsert(documentToBeInserted, Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately before an auto insert
+`beforeInsert="addTimestampToDocBeforeInsert"` will call `addTimestampToDocBeforeInsert(documentToBeInserted, Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately before an auto insert. Return a modified document to have that inserted. Return `false` (not just any falsey value) to cancel the insert.
 
 `afterInsert="callbackFunction"` will call `callbackFunction(newlyInsertedDocument, Collection)`, with `this` as the data that the `editableText` widget was initialized with, immediately after an auto insert
 
 `beforeUpdate="coerceTypeToDateBeforeUpdate"`, will call `coerceTypeToDateBeforeUpdate(doc, Collection, newValue, modifier)`, with `this` as the data that the `editableText` widget was initialized with. `beforeUpdate` callbacks are special cased to be called with the `newValue` and `modifier` arguments. Also, for `beforeUpdate` callbacks only, if the callback function returns a value, that will replace the `newValue` that the user entered, **unless** the callback returns an object with `$set`, `$addToSet` or `$push` as one of its keys -- in this case, it will be assumed that it is overwriting the whole modifier, not just the `newValue`. See the examples below.
 
-Other available callback function hooks are `afterUpdate`, `beforeRemove`, `afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`.
+Other available callback function hooks are `afterUpdate`, `beforeRemove`, `afterRemove` -- they each receive the document and Collection as their parameters and have the full widget data as `this`.  Returning `false` (not just any falsey value) from any of the 'before' callback functions will cause the action to be cancelled.
 
 `onStartEditing` and `onStopEditing` callbacks are called with `this` as the data that the `editableText` widget was initialized with and the document being edited as the only parameter. (The same is true of `onShowToolbar` and `onHideToolbar` if the `babrahams:editable-text-wysiwyg-bootstrap-3` package is added.)
 

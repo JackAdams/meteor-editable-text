@@ -5,6 +5,11 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.0
+
+- Made the callback behaviour more consistent
+- Allowed cancelling of actions by returning `false` from callback functions
+
 ### v0.8.31
 
 - Fixed a bug where substitute html would display instead of zeros for `type="number"`

@@ -1,7 +1,7 @@
 allow-deny@1.0.5
 babel-compiler@6.8.5
 babel-runtime@0.1.9_1
-babrahams:editable-text@0.8.30
+babrahams:editable-text@0.8.31
 base64@1.0.9
 binary-heap@1.0.9
 blaze@2.1.8
@@ -18,7 +18,6 @@ ddp-common@1.2.6
 ddp-server@1.2.10
 deps@1.0.12
 diff-sequence@1.0.6
-djedi:sanitize-html@1.11.3
 ecmascript@0.4.8
 ecmascript-runtime@0.2.12
 ejson@1.0.12
