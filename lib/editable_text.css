@@ -17,6 +17,7 @@
   border-radius: 4px;
   background: #fff;
   cursor: pointer;
+  z-index: 1;
 }
 
 .editable-text-save-button:hover {

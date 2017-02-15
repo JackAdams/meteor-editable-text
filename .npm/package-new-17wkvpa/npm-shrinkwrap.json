@@ -1,0 +1,68 @@
+{
+  "dependencies": {
+    "sanitize-html": {
+      "version": "1.14.1",
+      "dependencies": {
+        "htmlparser2": {
+          "version": "3.9.2",
+          "dependencies": {
+            "domelementtype": {
+              "version": "1.3.0"
+            },
+            "domhandler": {
+              "version": "2.3.0"
+            },
+            "domutils": {
+              "version": "1.5.1",
+              "dependencies": {
+                "dom-serializer": {
+                  "version": "0.1.0",
+                  "dependencies": {
+                    "domelementtype": {
+                      "version": "1.1.3"
+                    }
+                  }
+                }
+              }
+            },
+            "entities": {
+              "version": "1.1.1"
+            },
+            "inherits": {
+              "version": "2.0.3"
+            },
+            "readable-stream": {
+              "version": "2.2.2",
+              "dependencies": {
+                "buffer-shims": {
+                  "version": "1.0.0"
+                },
+                "core-util-is": {
+                  "version": "1.0.2"
+                },
+                "isarray": {
+                  "version": "1.0.0"
+                },
+                "process-nextick-args": {
+                  "version": "1.0.7"
+                },
+                "string_decoder": {
+                  "version": "0.10.31"
+                },
+                "util-deprecate": {
+                  "version": "1.0.2"
+                }
+              }
+            }
+          }
+        },
+        "regexp-quote": {
+          "version": "0.0.0"
+        },
+        "xtend": {
+          "version": "4.0.1"
+        }
+      }
+    }
+  }
+}

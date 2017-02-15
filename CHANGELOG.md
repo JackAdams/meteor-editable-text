@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.2
+
+- Autolinking of any links in wysiwyg editors
+
 ### v0.9.1
 
 - Defer the switch of templates after an update to prevent flicker
