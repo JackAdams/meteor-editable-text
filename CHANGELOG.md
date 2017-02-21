@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.3
+
+- Added missing style elements, so you can now use `style=" ... "` when initializing the widget
+
 ### v0.9.2
 
 - Autolinking of any links in wysiwyg editors
