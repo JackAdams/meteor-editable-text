@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.4
+
+- Fixed after insert callbacks (they were async before so the newly-inserted document wasn't available for the callback function)
+
 ### v0.9.3
 
 - Added missing style elements, so you can now use `style=" ... "` when initializing the widget
