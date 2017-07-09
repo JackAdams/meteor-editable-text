@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.5
+
+- Made autoResize inactive until there is some text typed (so users can see placeholders)
+
 ### v0.9.4
 
 - Fixed after insert callbacks (they were async before so the newly-inserted document wasn't available for the callback function)
