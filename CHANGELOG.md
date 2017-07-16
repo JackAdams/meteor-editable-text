@@ -5,6 +5,11 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.6
+
+- Added support for custom buttons on wysiwyg plugins
+- Added support for forcing the case of entered text to upper or lower
+
 ### v0.9.5
 
 - Made autoResize inactive until there is some text typed (so users can see placeholders)
