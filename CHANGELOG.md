@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.7
+
+- Fix for `onStopEditing` callback when cancelling editing
+
 ### v0.9.6
 
 - Added support for custom buttons on wysiwyg plugins
