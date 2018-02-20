@@ -1,7 +1,7 @@
 Package.describe({
   name: "babrahams:editable-text",
   summary: "Editable text drop-in template helper",
-  version: "0.9.7",
+  version: "0.9.8",
   git: "https://github.com/jackadams/meteor-editable-text.git"
 });
 
@@ -9,7 +9,7 @@ Package.onUse(function (api, where) {
 
   api.versionsFrom("1.0");
   
-  Npm.depends({'sanitize-html': '1.14.1'});
+  Npm.depends({'sanitize-html': '1.17.0'});
 
   api.use('jquery', 'client');
   api.use('tracker', 'client');

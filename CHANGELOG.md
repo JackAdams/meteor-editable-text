@@ -5,6 +5,12 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.8
+
+- Improved hack for focusing correct element after `autoInsert` operation
+- Updated `sanitize-html` from 1.14.1 to 1.17.0
+- Added `afterRender` hook on the client for wysiwyg content (undocumented)
+
 ### v0.9.7
 
 - Fix for `onStopEditing` callback when cancelling editing
