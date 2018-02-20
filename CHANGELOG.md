@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.9
+
+- Version bump because something went wrong in the publish process for 0.9.8
+
 ### v0.9.8
 
 - Improved hack for focusing correct element after `autoInsert` operation
