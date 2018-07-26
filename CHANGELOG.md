@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.10
+
+- Small modification to allow `babrahams:editable-list` package to work with arrays of objects
+
 ### v0.9.9
 
 - Version bump because something went wrong in the publish process for 0.9.8
