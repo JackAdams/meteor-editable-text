@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.11
+
+- Added `allowNegative` flag to allow negative numbers for `type="number"`
+
 ### v0.9.10
 
 - Small modification to allow `babrahams:editable-list` package to work with arrays of objects
