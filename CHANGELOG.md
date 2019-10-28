@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.12
+
+- Added `openAfterAutoInsertTarget` to help target which element is opened after a document is auto-inserted
+
 ### v0.9.11
 
 - Added `allowNegative` flag to allow negative numbers for `type="number"`
