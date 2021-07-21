@@ -5,6 +5,14 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.14
+
+- Updated dependency on `sanitize-html` to 2.3.0
+
+### v0.9.13
+
+- Version bump as per 1.8.2 instructions in [Meteor changelog](https://github.com/meteor/meteor/blob/devel/History.md)
+
 ### v0.9.12
 
 - Added `openAfterAutoInsertTarget` to help target which element is opened after a document is auto-inserted
