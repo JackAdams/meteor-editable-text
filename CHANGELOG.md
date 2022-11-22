@@ -5,6 +5,10 @@ Meteor Editable Text
 
 - Tests
 
+### v0.9.18
+
+- Updated dependency on `sanitize-html` to 2.7.3
+
 ### v0.9.14
 
 - Updated dependency on `sanitize-html` to 2.3.0
